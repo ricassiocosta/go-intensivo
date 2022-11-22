@@ -36,8 +36,7 @@ func (suite *OrderRepositoryTestSuite) TestNewOrderRepository() {
 	order, err := entity.NewOrder("fake-uuid", 2, 2)
 	suite.NoError(err)
 
-	repo, err := NewOrderRepository(suite.Db)
-	suite.NoError(err)
+	repo := NewOrderRepository(suite.Db)
 
 	err = repo.Save(order)
 	suite.NoError(err)

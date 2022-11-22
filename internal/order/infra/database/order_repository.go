@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"errors"
 
 	"github.com/ricassiocosta/gointensivo/internal/order/entity"
 )
@@ -11,14 +10,10 @@ type OrderRepository struct {
 	Db *sql.DB
 }
 
-func NewOrderRepository(db *sql.DB) (*OrderRepository, error) {
-	if db == nil {
-		return nil, errors.New("database connection is missing")
-	}
-
+func NewOrderRepository(db *sql.DB) *OrderRepository {
 	return &OrderRepository{
 		Db: db,
-	}, nil
+	}
 }
 
 func (r *OrderRepository) Save(order *entity.Order) error {
