@@ -5,6 +5,13 @@ import (
 	"strings"
 )
 
+var (
+	errMissingOrderID         = errors.New("order id is missing")
+	errMissingOrderPrice      = errors.New("order price is missing")
+	errMissingOrderTax        = errors.New("order tax is missing")
+	errMissingOrderFinalPrice = errors.New("order final price is missing")
+)
+
 type Order struct {
 	ID         string
 	Price      float64
@@ -29,19 +36,19 @@ func NewOrder(id string, price float64, tax float64) (*Order, error) {
 func (o *Order) IsValid() error {
 	o.ID = strings.TrimSpace(o.ID)
 	if len(o.ID) == 0 {
-		return errors.New("ID is missing")
+		return errMissingOrderID
 	}
 
 	if o.Price < 0 {
-		return errors.New("price is invalid")
+		return errMissingOrderPrice
 	}
 
 	if o.Tax < 0 {
-		return errors.New("tax is invalid")
+		return errMissingOrderTax
 	}
 
 	if o.FinalPrice < 0 {
-		return errors.New("final price is invalid")
+		return errMissingOrderFinalPrice
 	}
 
 	return nil
