@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -48,5 +49,6 @@ func main() {
 
 		msg.Ack(false)
 		fmt.Println(outputDTO)
+		time.Sleep(100 * time.Millisecond)
 	}
 }
